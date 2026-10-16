@@ -6,7 +6,12 @@ Base: `https://jesse-docket.github.io/circle-requalify/`
 https://jesse-docket.github.io/circle-requalify/plus-sales/
 
 Three shortcut buttons under the form fill it instantly. Submit and you land on the page where
-Clara lives, already talking. Use **↺ Reset session** (bottom-left) between runs.
+Clara lives, already talking.
+
+**Between runs, press ↺ Reset session** (bottom-left of Clara's page). The widget keeps a visitor
+id in browser storage, so without a reset the next link reopens the previous person's
+conversation. The button clears it before the widget boots. You can also append **`&reset=1`** to
+any link below to start that run clean.
 
 ## The three scenarios, as direct links
 
@@ -27,6 +32,7 @@ https://jesse-docket.github.io/circle-requalify/connect-with-sales/?firstname=Le
 
 - **No submission attached** (Clara runs open discovery): https://jesse-docket.github.io/circle-requalify/connect-with-sales/
 - **Panel open but silent until clicked:** add `&autostart=0`
+- **Force a brand-new visitor:** add `&reset=1`
 - **Any other combination:** the link builder in the footer of the Clara page, in plain language.
 
 ## What to check
