@@ -1,6 +1,22 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>
+/* Runs before the Docket loader so a reset really gets a new visitor:
+   the widget writes __aiseller_client_id / widget_auth_token on init, so
+   clearing storage after it has started does nothing. */
+(function(){
+  try{
+    var q = new URLSearchParams(location.search);
+    if (q.get('reset') === '1'){
+      try{ localStorage.clear(); sessionStorage.clear(); }catch(e){}
+      q.delete('reset');
+      var qs = q.toString();
+      history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+    }
+  }catch(e){}
+})();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
@@ -212,8 +228,11 @@ function resetSession(){
   try{ if (window.AISeller && window.AISeller.resetContext) window.AISeller.resetContext(); }catch(e){}
   try{ if (window.AISeller && window.AISeller.hideAndDisconnect) window.AISeller.hideAndDisconnect(); }catch(e){}
   try{ localStorage.clear(); sessionStorage.clear(); }catch(e){}
-  location.href = location.pathname;
+  /* ?reset=1 is cleared again at the very top of the next load, before the
+     widget boots, so the next visitor gets a genuinely new session. */
+  location.href = location.pathname + '?reset=1';
 }
+/* Any link can start clean: add &reset=1 to a test link. */
 
 /* ---------- test-link builder ---------- */
 const BMAP = {
