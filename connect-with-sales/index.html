@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Chat with sales</title>
+<meta name="description" content="Talk to Clara, our AI Circle expert, about pricing, plans, and finding the right fit — by text, voice, or avatar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.hero{position:relative;display:flex;flex-direction:column;align-items:center;overflow:hidden;
+  background:var(--hero);padding:96px 24px 120px;min-height:62vh}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero .inner{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;text-align:center;color:var(--ink)}
+.hero h1{font-size:64px;line-height:60px;font-weight:700;letter-spacing:-1px;margin:0 auto;max-width:14ch}
+@media(max-width:860px){.hero{padding:64px 20px 88px}.hero h1{font-size:40px;line-height:46px;max-width:none;text-align:left}.hero .inner{text-align:left}}
+.hero .sub{margin:40px auto 0;max-width:670px;font-size:20px;line-height:26px;font-weight:500;letter-spacing:-.25px}
+.hero .kick{margin:20px auto 0;max-width:670px;font-size:22px;line-height:26px;font-weight:700;letter-spacing:-.25px}
+.hero .kick span{display:inline-block;background:rgba(255,255,255,.65);border-radius:999px;padding:6px 16px}
+
+.recap{max-width:760px;margin:-56px auto 0;position:relative;z-index:2;background:#fff;
+  border:1px solid var(--line);border-radius:18px;padding:26px 28px;
+  box-shadow:0 10px 36px rgba(149,157,165,.18)}
+.recap h2{margin:0 0 4px;font-size:16px;font-weight:600;letter-spacing:-.2px}
+.recap p.meta{margin:0 0 18px;font-size:13px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;line-height:18px;background:#F4F6FB;border:1px solid #E3E8F5;color:#3d4148;
+  border-radius:999px;padding:6px 12px}
+.chip b{font-weight:600;color:var(--ink)}
+.routebadge{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;
+  letter-spacing:.2px;text-transform:uppercase;border-radius:999px;padding:5px 11px;margin-bottom:14px}
+.routebadge.sales{background:#EEE9FF;color:#3E1BC9}
+.routebadge.trial{background:#E6F6EC;color:#116B34}
+.routebadge i{width:7px;height:7px;border-radius:50%;background:currentColor;font-style:normal}
+.empty-note{max-width:760px;margin:-56px auto 0;position:relative;z-index:2;background:#fff;
+  border:1px dashed #d6d9de;border-radius:18px;padding:22px 26px;color:var(--muted);font-size:14px}
+.empty-note a{color:var(--dma-secondary-color);font-weight:600}
+
+.builder{max-width:760px;margin:56px auto 0;border:1px solid var(--line);border-radius:18px;background:#fff}
+.builder summary{cursor:pointer;padding:18px 24px;font-size:15px;font-weight:600;list-style:none}
+.builder summary::-webkit-details-marker{display:none}
+.builder summary::before{content:'＋ ';color:var(--muted)}
+.builder[open] summary::before{content:'－ '}
+.builder .body{padding:0 24px 24px;display:grid;gap:14px}
+.builder label{display:grid;gap:6px;font-size:13px;color:var(--muted);font-weight:500}
+.builder select,.builder input{font-family:inherit;font-size:15px;color:var(--ink);background:#fff;
+  border:1px solid #d6d9de;border-radius:10px;padding:11px 13px;width:100%}
+.builder .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.builder .out{font-size:12px;word-break:break-all;color:var(--muted);background:#f7f8fa;
+  border:1px solid var(--line);border-radius:10px;padding:12px}
+.disclaimer{max-width:760px;margin:26px auto 0;font-size:12px;line-height:18px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="hdr"><div class="in">
+  <a href="../"><img src="../assets/circle-logo.svg" alt="Circle"></a>
+  <nav class="nav">
+    <a href="#">Product</a><a href="#">Branded Apps</a><a href="#">Resources</a>
+    <a href="#">Discover</a><a href="#">Pricing</a>
+  </nav>
+  <div class="right">
+    <a class="login" href="#">Log in</a>
+    <a class="pill" href="#">Start free trial</a>
+  </div>
+</div></header>
+
+<section class="hero">
+  <img class="bg" src="../assets/hero-bg.jpg" alt="">
+  <div class="inner">
+    <h1>Get answers without the wait, chat with Sales now.</h1>
+    <p class="sub">Clara is our AI Circle Expert — trained by our sales team on everything Circle.
+      Ask about pricing, plans, booking a call, or finding the right plan for you. Text, voice, or avatar.</p>
+    <p class="kick"><span>Clara is opening on the right — she already has your answers</span></p>
+  </div>
+</section>
+
+<div id="recapSlot"></div>
+
+<details class="builder">
+  <summary>Build a test link</summary>
+  <div class="body">
+    <label>Their name <input id="b_first" placeholder="Dana"></label>
+    <label>Work email <input id="b_email" placeholder="dana@northfieldstudio.com"></label>
+    <label>Annual revenue across the business <select id="b_rev"></select></label>
+    <label>What they want to do <select id="b_goal"></select></label>
+    <label>How many members they have <select id="b_size"></select></label>
+    <label>Are they part of a team <select id="b_team"></select></label>
+    <label>Implementation timeline <select id="b_time"></select></label>
+    <div class="acts">
+      <button class="pill solid" type="button" onclick="buildOpen()">Open it</button>
+      <button class="pill" type="button" onclick="buildCopy()">Copy link</button>
+      <a class="pill" href="../plus-sales/">Start from the form instead</a>
+    </div>
+    <div class="out" id="b_out"></div>
+  </div>
+</details>
+
+<p class="disclaimer">Demo environment built by Docket using Circle's public branding. Plans and pricing
+reflect circle.so's public pricing (Professional $89/mo · Business $199/mo · Scale $419/mo ·
+Circle Plus custom; 14-day free trial, no credit card). No form data leaves the browser and no
+real meeting is booked from this page.</p>
+
+<footer class="ftr"><div class="in">
+  <img class="wm" src="../assets/circle-logo.svg" alt="Circle">
+  <div class="cols">
+    <div><h4>Website</h4><ul><li><a href="#">Home</a></li><li><a href="#">Pricing</a></li><li><a href="#">Careers</a></li><li><a href="#">Affiliate program</a></li></ul></div>
+    <div><h4>Circle Plus</h4><ul><li><a href="#">Platform</a></li><li><a href="#">Branded app</a></li><li><a href="#">Customer stories</a></li><li><a href="#">Comprehensive support</a></li></ul></div>
+    <div><h4>Community</h4><ul><li><a href="#">Discussions</a></li><li><a href="#">Courses</a></li><li><a href="#">Events</a></li><li><a href="#">Chat</a></li><li><a href="#">Gamification</a></li></ul></div>
+    <div><h4>Grow &amp; Earn</h4><ul><li><a href="#">Website Builder</a></li><li><a href="#">Email Marketing</a></li><li><a href="#">Payments</a></li><li><a href="#">Analytics</a></li><li><a href="#">Studios</a></li></ul></div>
+    <div><h4>AI &amp; Automation</h4><ul><li><a href="#">Circle AI</a></li><li><a href="#">AI Agents</a></li><li><a href="#">AI Workflows</a></li><li><a href="#">Workflows</a></li><li><a href="#">Integrations</a></li></ul></div>
+  </div>
+  <div class="badges">
+    <span>SOC 2<br>Certified</span><span>GDPR<br>Compliant</span>
+    <span>CCPA<br>Compliant</span><span>PCI SAQ<br>Compliant</span>
+  </div>
+  <div class="legal">
+    <a href="#">99.9% Uptime</a><a href="#">Privacy Policy</a><a href="#">Terms</a>
+    <a href="#">Cookie Policy</a><span>© 2026 Circle. All rights reserved.</span>
+  </div>
+</div></footer>
+
+<button class="reset" onclick="resetSession()">↺ Reset session</button>
+<div class="simbadge"><b>Demo</b> · Docket × Circle</div>
+
+<!-- ============ Docket widget (agent: Clara - Re-Qualification) ============ -->
+<script>
+window.AISellerSettings = {
+  agent_id: '711a4f88-d33d-4930-98c3-e50f1dc367f7',
+};
+(function () {
+  var w = window; var ew = w.AISeller;
+  if (typeof ew === 'function') { ew('update', w.AISellerSettings); }
+  else {
+    var d = document;
+    var i = function () { i.q.push(arguments); };
+    i.q = []; i.q.push(['update', w.AISellerSettings]); w.AISeller = i;
+    var l = function () {
+      var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true;
+      s.src = 'https://cdn.docketai.com/script/app/inbound-se-script/ai-seller.js';
+      var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    };
+    if (document.readyState === 'complete') { l(); }
+    else if (w.attachEvent) { w.attachEvent('onload', l); }
+    else { w.addEventListener('load', l, false); }
+  }
+})();
+</script>
+
+<script src="../assets/flow.js"></script>
+<script>
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const g   = k => new URLSearchParams(location.search).get(k) || '';
+const ANSWERS = CIRCLE.fromQuery();
+const CTX     = CIRCLE.context(ANSWERS);
+const HAS     = !!ANSWERS.annual_revenue__range_;
+
+/* ---------- what they submitted, shown back to them ---------- */
+(function renderRecap(){
+  const slot = document.getElementById('recapSlot');
+  if (!HAS){
+    slot.innerHTML = '<div class="empty-note">No submission attached to this link — Clara will open and '
+      + 'run discovery from scratch. To see the re-qualification split, '
+      + '<a href="../plus-sales/">fill in the form</a> or build a test link below.</div>';
+    return;
+  }
+  const chips = [
+    ['Goal',      ANSWERS.what_do_you_want_to_achieve_with_circle_],
+    ['Members',   ANSWERS.current_community_or_membership_size],
+    ['Revenue',   ANSWERS.annual_revenue__range_],
+    ['Team',      ANSWERS.part_of_a_team],
+    ['Timeline',  ANSWERS.desired_time_to_implement_community_product]
+  ].filter(r => r[1]);
+  const sales = CTX.route === 'sales';
+  slot.innerHTML =
+    '<div class="recap">'
+    + '<span class="routebadge ' + CTX.route + '"><i></i>'
+    + (sales ? 'Routed to our sales team' : 'Routed to a free trial') + '</span>'
+    + '<h2>Thanks' + (ANSWERS.firstname ? ', ' + esc(ANSWERS.firstname) : '') + ' — here is what you told us</h2>'
+    + '<p class="meta">Clara has all of this already. She will not ask you for it again.</p>'
+    + '<div class="chips">' + chips.map(r =>
+        '<span class="chip"><b>' + r[0] + ':</b> ' + esc(r[1]) + '</span>').join('') + '</div>'
+    + '</div>';
+})();
+
+/* ---------- Docket context bridge + co-browsing autostart ---------- */
+async function waitForAISeller(method, ms = 20000){
+  const t0 = Date.now();
+  while (Date.now() - t0 < ms){
+    if (window.AISeller && typeof window.AISeller[method] === 'function') return true;
+    await new Promise(r => setTimeout(r, 150));
+  }
+  return false;
+}
+(async function(){
+  if (HAS){
+    if (await waitForAISeller('setContext')) { try{ await window.AISeller.setContext(CTX); }catch(e){} }
+  } else {
+    if (await waitForAISeller('resetContext')) { try{ await window.AISeller.resetContext(); }catch(e){} }
+  }
+  if (await waitForAISeller('show')) { try{ window.AISeller.show(); }catch(e){} }
+  if (g('autostart') !== '0' && await waitForAISeller('showAndConnect')){
+    await new Promise(r => setTimeout(r, 1200));
+    try{ await window.AISeller.showAndConnect(); }catch(e){}
+  }
+})();
+
+function resetSession(){
+  try{ if (window.AISeller && window.AISeller.resetContext) window.AISeller.resetContext(); }catch(e){}
+  try{ if (window.AISeller && window.AISeller.hideAndDisconnect) window.AISeller.hideAndDisconnect(); }catch(e){}
+  try{ localStorage.clear(); sessionStorage.clear(); }catch(e){}
+  location.href = location.pathname;
+}
+
+/* ---------- test-link builder ---------- */
+const BMAP = {
+  b_goal:'what_do_you_want_to_achieve_with_circle_',
+  b_size:'current_community_or_membership_size',
+  b_rev :'annual_revenue__range_',
+  b_team:'part_of_a_team',
+  b_time:'desired_time_to_implement_community_product'
+};
+Object.keys(BMAP).forEach(id => {
+  const sel = document.getElementById(id), f = CIRCLE.FIELDS[BMAP[id]];
+  sel.innerHTML = f.options.map(o => '<option>' + esc(o) + '</option>').join('');
+  sel.addEventListener('change', buildOut);
+});
+['b_first','b_email'].forEach(id => document.getElementById(id).addEventListener('input', buildOut));
+
+function buildURL(){
+  const a = {};
+  const fn = document.getElementById('b_first').value.trim();
+  const em = document.getElementById('b_email').value.trim();
+  if (fn) a.firstname = fn;
+  if (em) a.email = em;
+  Object.keys(BMAP).forEach(id => a[BMAP[id]] = document.getElementById(id).value);
+  return location.origin + location.pathname + '?' + new URLSearchParams(a).toString();
+}
+function buildOut(){
+  const url = buildURL();
+  const rev = document.getElementById('b_rev').value;
+  document.getElementById('b_out').textContent =
+    '[' + (CIRCLE.routeFor(rev) === 'sales' ? 'books a meeting' : 'starts a trial') + ']  ' + url;
+}
+function buildOpen(){ location.href = buildURL(); }
+function buildCopy(){
+  const url = buildURL();
+  navigator.clipboard.writeText(url).then(
+    () => { document.getElementById('b_out').textContent = 'Copied.  ' + url; },
+    () => { document.getElementById('b_out').textContent = url; });
+}
+buildOut();
+</script>
+</body>
+</html>
