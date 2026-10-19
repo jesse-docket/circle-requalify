@@ -177,6 +177,10 @@ document.getElementById('qf').addEventListener('submit', e => {
   const required = ['firstname','lastname','email'].concat(Object.keys(CIRCLE.FIELDS));
   if (required.some(k => !a[k])){ document.getElementById('err').classList.add('on'); return; }
   const qp = new URLSearchParams(a);
+  /* reset=1 is consumed before the widget boots on the next page, so every
+     submission arrives as a brand-new visitor instead of reopening the last
+     person's conversation. */
+  qp.set('reset', '1');
   location.href = '../connect-with-sales/?' + qp.toString();
 });
 </script>
